@@ -1,14 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
+import { selectMovies } from '../features/movie/movieSlice'
+import { useSelector } from 'react-redux'
 
 function Movies() {
+    const movies = useSelector(selectMovies);
+    console.log("This", movies);
+
   return (
     <Container>
       <h4>Recommended for you</h4>
       <Content>
-        <Wrap>
-            <img src=''/>
-        </Wrap>
+         {movies &&
+            movies.map((movie)=>(
+                <Wrap key={movie.id}>
+                    <img src={movie.cardImg}/>
+                </Wrap>
+            ))
+         }
 
       </Content>
     </Container>
@@ -33,7 +42,7 @@ const Wrap=styled.div`
       rgb(0 0 0 / 73%) 0px 16px 10px -10px;
       transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
 
-      
+
       img{
         width: 100%;
         height: 100%;
